@@ -8,33 +8,43 @@
             <h2>Your TODO list</h2>
             <div class="row">
                 @foreach($todos as $todo)
-                    <?php $priority = $todo->priority ?>
-                    <?php if ($priority === 5) {
-                        $priorityClass = 'red';
-                    } elseif ($priority === 4) {
-                        $priorityClass = 'orange';
-                    } else
-                        $priorityClass = 'green'
+                    <?php
+                    $priority = $todo->priority;
+                    switch ($priority) {
+                        case 5:
+                            $priorityClass = 'red';
+                            break;
+                        case 4:
+                            $priorityClass = 'orange';
+                            break;
+                        case 3:
+                            $priorityClass = 'orange';
+                            break;
+                        default:
+                            $priorityClass = 'green';
+                    }
                     ?>
-                <div class="col-md-10 {{ $priorityClass }} todo-items">
-                    <div class="row">
-                        <div class="col-md-10">{{ str_limit($todo->title, 75) }}</div>
-                        <div class="col-md-1">
-                            <a href="{{ route('todo.edit', $todo->id) }}">
-                                <i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                        <div class="col-md-1">
 
-                         {{--{!! Form::open(['route' => ['todo.destroy', $todo->id], 'method' => 'DELETE']) !!}--}}
-                         {{--{!! Form::button('<i class="fa fa-trash fa-2x" aria-hidden="true"></i>', ['type' =>'submit', 'class' =>'delete-todo']) !!}--}}
-                         {{--{!! Form::close() !!}--}}
+                    <div class="col-md-10 {{ $priorityClass }} todo-items">
+                        <div class="row">
+                            <div class="col-md-10">{{ str_limit($todo->title, 75) }}</div>
+                            <div class="col-md-1">
+                                <a href="{{ route('todo.edit', $todo->id) }}">
+                                    <i class="fa fa-pencil fa-2x" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-1">
 
-                            <a href="{{ route('todo.show', $todo->id) }}"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></a>
-                            
+                                {{--{!! Form::open(['route' => ['todo.destroy', $todo->id], 'method' => 'DELETE']) !!}--}}
+                                {{--{!! Form::button('<i class="fa fa-trash fa-2x" aria-hidden="true"></i>', ['type' =>'submit', 'class' =>'delete-todo']) !!}--}}
+                                {{--{!! Form::close() !!}--}}
+
+                                <a href="{{ route('todo.show', $todo->id) }}"><i class="fa fa-trash fa-2x"
+                                                                                 aria-hidden="true"></i></a>
+
+                            </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
             </div>
             <div class="col-md-12 text-center">{!! $todos->links() !!}</div>
