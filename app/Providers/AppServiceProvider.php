@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Todo;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $completedTODO = Todo::where('completed', '=', 'Yes')->count();
+
+
+        //dd($completedTODO);
+
+        view()->share('completedTODO',$completedTODO);
+
+        // Kan ook nog korter met
+        // view()->share('completedTODO',Todo::where('completed', '=', 'Yes')->count());
     }
 
     /**

@@ -20,10 +20,17 @@
                         <a href="{{ route('index') }}" class="btn btn-success">TODO tasks</a>
                     </li>
 
-                {{--Hier zou dan de if-stucture komen om de btn enkel te tonen als er items zijn die completed zijn--}}
-                    <li>
-                        <a href="{{ route('completed') }}" class="btn btn-default">All Completed TODO tasks</a>
-                    </li>
+                    {{--Hier zou dan de if-stucture komen om de btn enkel te tonen als er items zijn
+                    die completed zijn
+                    Sharing Data With All Views https://laravel.com/docs/5.3/views#sharing-data-with-all-views
+                    --}}
+                    @if($completedTODO === 0)
+                        <li></li>
+                    @else
+                        <li>
+                            <a href="{{ route('completed') }}" class="btn btn-default">All Completed TODO tasks</a>
+                        </li>
+                    @endif
 
                 @endif
             </ul>
