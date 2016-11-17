@@ -1,16 +1,17 @@
 {{--Form include--}}
 
 <div class="form-group">
-    {{ Form::label('title', 'Title') }}
+    {{ Form::label('title', 'Title of the item') }}
     {{ Form::text('title', null, ['class' => 'form-control']) }}
+    {!! $errors->first('title', '<p class="alert alert-danger alert-marge">:message</p>') !!}
 </div>
 <div class="radio-group col-md-12">
     <div class="form-group">
-        <p class="text-uppercase"><strong>Priority</strong></p>
+        <p class="text-uppercase"><strong>Priority (no pressure)</strong></p>
         <ul>
             <li>
                 {{ Form::radio('priority', '1', null, ['id' => '1-option']) }}
-                {{ Form::label('1-option', '1') }}
+                {{ Form::label('1-option', '1 - taking it easy') }}
                 <div class="check"><div class="inside"></div></div>
             </li>
             <li>
@@ -30,7 +31,7 @@
             </li>
             <li>
                 {{ Form::radio('priority', '5', true, ['id' => '5-option']) }}
-                {{ Form::label('5-option', '5') }}
+                {{ Form::label('5-option', '5 - Urgently') }}
 
                 <div class="check"><div class="inside"></div></div>
             </li>

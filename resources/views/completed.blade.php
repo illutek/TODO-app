@@ -4,28 +4,42 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 todo_list">
             <h2>Your Completed list</h2>
             <div class="row">
-                @foreach($todos as $todo)
-                    <?php $priority = $todo->priority ?>
-                    <?php if ($priority === 5) {
-                        $priorityClass = 'red';
-                    } elseif ($priority === 4) {
-                        $priorityClass = 'orange';
-                    } else
-                        $priorityClass = 'green'
-                    ?>
-                <div class="col-md-10 {{ $priorityClass }} todo-items">
-                    <div class="row">
-                        <div class="col-md-11">{{ $todo->title }}</div>
-                        <div class="col-md-1">
-                        </div>
+                @if ($todos->isEmpty())
+                    <div class="alert alert-info">
+                        <p>No TODO items completed</p>
                     </div>
-
-                </div>
-
-                @endforeach
+                @else
+                    @foreach($todos as $todo)
+                        <?php
+                        $priority = $todo->priority;
+                        switch ($priority) {
+                            case 5:
+                                $priorityClass = 'red';
+                                break;
+                            case 4:
+                                $priorityClass = 'orange';
+                                break;
+                            case 3:
+                                $priorityClass = 'orange';
+                                break;
+                            default:
+                                $priorityClass = 'green';
+                        }
+                        ?>
+                        <div class="col-md-10 {{ $priorityClass }} todo-items">
+                            <div class="row">
+                                <div class="col-md-11">{{ $todo->title }}</div>
+                                <div class="col-md-1">
+                                    <a href="{{ route('todo.show', $todo->id) }}"><i class="fa fa-trash fa-2x"
+                                                                                     aria-hidden="true"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
         <div class="col-md-4">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveTodoRequest;
 use Illuminate\Http\Request;
 use App\Todo;
 
@@ -25,10 +26,12 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todos = Todo::orderBy('priority', 'desc')
-            ->where('completed', '=', 'No')
-            ->paginate(7);
-
+        $todos = auth()
+        ->user()
+        ->todos()
+        ->orderBy('priority', 'desc')
+        ->where('completed', '=', 'No')
+        ->paginate(7);
 
         return view('welcome', compact('todos'));
     }
@@ -36,10 +39,12 @@ class TodoController extends Controller
 
     public function completed()
     {
-        $todos = Todo::orderBy('priority', 'desc')
-            ->where('completed', '=', 'Yes')
-            ->paginate(7);
-
+        $todos = auth()
+        ->user()
+        ->todos()
+        ->orderBy('priority', 'desc')
+        ->where('completed', '=', 'Yes')
+        ->paginate(7);
 
         return view('completed', compact('todos'));
     }
@@ -60,7 +65,7 @@ class TodoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveTodoRequest $request)
     {
         $todo = new Todo();
 
@@ -100,6 +105,8 @@ class TodoController extends Controller
     {
         $todo = Todo::findOrFail($id);
 
+        $this->authorize('update', $todo);
+
         return view('todo.edit', compact('todo'));
     }
 
@@ -110,13 +117,15 @@ class TodoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(SaveTodoRequest $request, $id)
     {
         $todo = Todo::findOrFail($id);
 
         $todo->title = $request->title;
         $todo->priority = $request->priority;
         $todo->completed = $request->completed;
+
+        $this->authorize('update', $todo);
 
         $todo->save();
 
@@ -134,6 +143,8 @@ class TodoController extends Controller
     public function destroy($id)
     {
         $todo = Todo::findOrFail($id);
+
+        $this->authorize('update', $todo);
 
         $todo->delete();
 

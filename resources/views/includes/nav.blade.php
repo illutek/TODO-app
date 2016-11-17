@@ -16,12 +16,15 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav custom-nav">
                 @if (Auth::check())
-                        <li>
-                            <a href="{{ route('index') }}" class="btn btn-success">TODO tasks</a>
-                        </li>
-                        <li>
-                            <a href="{{ route('completed') }}" class="btn btn-default">All Completed TODO tasks</a>
-                        </li>
+                    <li>
+                        <a href="{{ route('index') }}" class="btn btn-success">TODO tasks</a>
+                    </li>
+
+                {{--Hier zou dan de if-stucture komen om de btn enkel te tonen als er items zijn die completed zijn--}}
+                    <li>
+                        <a href="{{ route('completed') }}" class="btn btn-default">All Completed TODO tasks</a>
+                    </li>
+
                 @endif
             </ul>
 

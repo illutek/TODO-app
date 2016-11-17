@@ -8,6 +8,10 @@
     background: orange;
 }
 
+.yellow {
+    background: #e6e900;
+}
+
 .green {
     background: green;
 }
@@ -142,13 +146,18 @@ input[type=radio]:checked ~ label {
 
 }
 
+.alert-marge {
+    margin-top: 15px;
+}
+
+
 /*Bootstrap override*/
 
 .navbar-default {
     padding: 15px 0;
 }
 
-.custom-nav .btn-default {
+.navbar-nav .btn-success {
     margin-right: 15px;
     background: #2e6da4;
 }
