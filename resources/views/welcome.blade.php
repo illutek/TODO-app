@@ -11,26 +11,26 @@
                     <p>No TODO items added</p>
                 @else
                     @foreach($todos as $todo)
-                        <?php
-                        $priority = $todo->priority;
-                        // Zou beter in een helper function komen, geen idee
-                        // hoe ik hieraan moet beginnen
-                        switch ($priority) {
-                            case 5:
-                                $priorityClass = 'red';
-                                break;
-                            case 4:
-                                $priorityClass = 'orange';
-                                break;
-                            case 3:
-                                $priorityClass = 'yellow';
-                                break;
-                            default:
-                                $priorityClass = 'green';
-                        }
-                        ?>
+                        {{--// Zou beter in een helper function komen, geen idee--}}
+                        {{--// Gekozen voor laracasts/presenter--}}
+                        {{--// hoe ik hieraan moet beginnen--}}
+                        {{--switch ($priority) {--}}
+                            {{--case 5:--}}
+                                {{--$priorityClass = 'red';--}}
+                                {{--break;--}}
+                            {{--case 4:--}}
+                                {{--$priorityClass = 'orange';--}}
+                                {{--break;--}}
+                            {{--case 3:--}}
+                                {{--$priorityClass = 'yellow';--}}
+                                {{--break;--}}
+                            {{--default:--}}
+                                {{--$priorityClass = 'green';--}}
+                        {{--}--}}
+                        {{--?>--}}
 
-                        <div class="col-md-10 {{ $priorityClass }} todo-items">
+
+                        <div class="col-md-10 {{ $todo->present()->priorityClass }} todo-items">
                             <div class="row">
                                 <div class="col-md-10">{{ str_limit($todo->title, 75) }}</div>
                                 <div class="col-md-1">

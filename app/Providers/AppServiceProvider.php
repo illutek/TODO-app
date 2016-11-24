@@ -18,7 +18,8 @@ class AppServiceProvider extends ServiceProvider
 
 
         //dd($completedTODO);
-
+        // Beter onderstaande gebruiken
+        //https://laravel.com/docs/5.3/views#view-composers
         view()->share('completedTODO',$completedTODO);
 
         // Kan ook nog korter met

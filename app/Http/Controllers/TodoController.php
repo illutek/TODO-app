@@ -26,6 +26,12 @@ class TodoController extends Controller
      */
     public function index()
     {
+        // het sorteren moet nog verder uitgewerkt worden
+        //$sort = $request->get('s');
+        //$order = $request->get('o');
+        //$o = ($order == "asc") ? 'desc' : 'asc';
+
+
         $todos = auth()
         ->user()
         ->todos()
@@ -33,7 +39,7 @@ class TodoController extends Controller
         ->where('completed', '=', 'No')
         ->paginate(7);
 
-        return view('welcome', compact('todos'));
+        return view('welcome', compact('todos', 'o'));
     }
 
 

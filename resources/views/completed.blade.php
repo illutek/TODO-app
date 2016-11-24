@@ -13,23 +13,8 @@
                     </div>
                 @else
                     @foreach($todos as $todo)
-                        <?php
-                        $priority = $todo->priority;
-                        switch ($priority) {
-                            case 5:
-                                $priorityClass = 'red';
-                                break;
-                            case 4:
-                                $priorityClass = 'orange';
-                                break;
-                            case 3:
-                                $priorityClass = 'orange';
-                                break;
-                            default:
-                                $priorityClass = 'green';
-                        }
-                        ?>
-                        <div class="col-md-10 {{ $priorityClass }} todo-items">
+
+                        <div class="col-md-10 {{ $todo->present()->priorityClass }} todo-items">
                             <div class="row">
                                 <div class="col-md-11">{{ $todo->title }}</div>
                                 <div class="col-md-1">

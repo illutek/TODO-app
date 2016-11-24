@@ -25,3 +25,20 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+
+###Presenter 
+
+https://github.com/laracasts/Presenter
+
+```composer require laracasts/presenter ``` 
+
+Handmatig file aanmaken onder app/Presenters/TodoPresenter.php, had eerst de fout gemaakt om dit in een map te plaatsen
+Presenter, achterna aangepast heb ook opnieuw het cmd composer  ..  moeten runnen
+
+De TODO model volgende code toevoegen
+```
+ use PresentableTrait;
+    protected $presenter = TodoPresenter::class;
+```
+
